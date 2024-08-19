@@ -27,6 +27,7 @@ The app is designed using the MVVM (Model-View-ViewModel) architecture pattern, 
 - **Paging 3**: For handling large datasets with pagination.
 - **Coroutines**: For asynchronous programming.
 - **Coil**: For image loading
+- **Mockito**: For creating mock objects and verifying interactions in tests.
 
 ## Key Values Demonstrated
 - **Performance**: The app leverages Retrofit for efficient network operations and Paging 3 to handle large datasets with smooth pagination. The UI is built with Jetpack Compose, which ensures a responsive and performant user experience.
@@ -35,7 +36,7 @@ The app is designed using the MVVM (Model-View-ViewModel) architecture pattern, 
 
 - **Maintainability**: The MVVM architecture and clean separation of concerns make the app easy to maintain and extend. The use of dependency injection with Hilt helps manage dependencies efficiently.
 
-- **Testability**: The app includes unit tests and integration tests to ensure the correctness of components. Tests are organized to cover critical functionalities and edge cases.
+- **Testability**: The app includes unit and integration tests to ensure correctness and reliability. ViewModel tests validate state management and interactions with repositories, while repository tests verify data retrieval and error handling from APIs. Compose UI tests ensure that UI components render correctly and handle user interactions.
 
 - **Scalability**: The architecture supports adding new features with minimal changes to existing code. The use of Paging 3 and Retrofit allows the app to handle a growing dataset effectively.
 

@@ -32,6 +32,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.BrushPainter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -72,7 +73,8 @@ fun DetailScreenContent(
             Text(
                 text = movieDetail.title,
                 fontSize = 28.sp,
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.testTag("title")
             )
             WatchTimeAndRating(time = movieDetail.runtime, rating = movieDetail.rating)
             HorizontalDivider(
@@ -133,6 +135,7 @@ fun ImageWithBackButton(
             modifier = modifier
                 .fillMaxWidth()
                 .height(300.dp)
+                .testTag("banner")
         )
         IconButton(
             onClick = onBack,

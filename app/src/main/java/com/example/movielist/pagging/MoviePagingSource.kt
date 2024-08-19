@@ -9,18 +9,26 @@ import javax.inject.Inject
 class MoviePagingSource @Inject constructor(private val movieApi: MovieAPI) :
     PagingSource<Int, MovieListItem>() {
     override fun getRefreshKey(state: PagingState<Int, MovieListItem>): Int? {
-        return state.anchorPosition
+        return state.anchorPosition?.let { anchorPosition ->
+            state.closestPageToPosition(anchorPosition)?.prevKey?.plus(1)
+                ?: state.closestPageToPosition(anchorPosition)?.nextKey?.minus(1)
+        }
     }
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, MovieListItem> {
         return try {
             val page = params.key ?: 1
-            val response = movieApi.getPopularMovies(page).body()!!.results
-            LoadResult.Page(
-                data = response,
-                prevKey = if (page == 1) null else page.minus(1),
-                nextKey = if (response.isEmpty()) null else page.plus(1)
-            )
+            val response = movieApi.getPopularMovies(page)
+            if (response.isSuccessful && response.body() != null) {
+                val movieList = response.body()!!.results
+                LoadResult.Page(
+                    data = movieList,
+                    prevKey = if (page == 1) null else page - 1,
+                    nextKey = if (movieList.isEmpty()) null else page + 1
+                )
+            } else {
+                LoadResult.Error(Exception("API call failed or body is null"))
+            }
         } catch (e: Exception) {
             LoadResult.Error(
                 e

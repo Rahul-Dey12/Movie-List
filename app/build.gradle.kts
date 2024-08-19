@@ -66,13 +66,18 @@ dependencies {
     //Retrofit
     implementation("com.squareup.retrofit2:retrofit:2.11.0")
     implementation("com.squareup.retrofit2:converter-moshi:2.11.0")
+    testImplementation(libs.junit.junit)
 
     //Moshi
     kapt("com.squareup.moshi:moshi-kotlin-codegen:1.15.1")
 
     //Hilt
-    implementation("com.google.dagger:hilt-android:2.48")
-    kapt("com.google.dagger:hilt-android-compiler:2.48")
+    val hiltVersion = 2.48
+    implementation("com.google.dagger:hilt-android:$hiltVersion")
+    kapt("com.google.dagger:hilt-android-compiler:$hiltVersion")
+    androidTestImplementation("com.google.dagger:hilt-android-testing:$hiltVersion")
+    kaptAndroidTest("com.google.dagger:hilt-android-compiler:$hiltVersion")
+
 
     // ViewModel
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.4")
@@ -92,8 +97,19 @@ dependencies {
     val pagingVersion = "3.3.2"
     implementation ( "androidx.paging:paging-runtime-ktx:$pagingVersion")
     implementation ("androidx.paging:paging-compose:$pagingVersion")
+    testImplementation("androidx.paging:paging-common-ktx:$pagingVersion")
+    testImplementation("androidx.paging:paging-testing:$pagingVersion")
 
     testImplementation(libs.junit)
+    //Mockito
+    testImplementation("org.mockito:mockito-core:5.7.0")
+    testImplementation("org.mockito.kotlin:mockito-kotlin:3.2.0")
+
+    // Coroutines Test
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.1")
+
+    // AndroidX Test
+    testImplementation("androidx.arch.core:core-testing:2.2.0")
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))

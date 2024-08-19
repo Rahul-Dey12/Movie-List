@@ -14,6 +14,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.BrushPainter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -45,7 +46,7 @@ fun MainScreenContent(
     Column(modifier = modifier.padding(16.dp)) {
         Header()
         Spacer(modifier = Modifier.height(16.dp))
-        MainScreenGrid(movieList, onItemClick)
+        MainScreenGrid(movieList, onItemClick, Modifier.testTag("MainScreenGrid"))
     }
 }
 

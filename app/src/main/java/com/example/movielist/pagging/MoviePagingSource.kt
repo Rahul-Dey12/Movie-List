@@ -4,9 +4,8 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.movielist.api.MovieAPI
 import com.example.movielist.data.MovieListItem
-import javax.inject.Inject
 
-class MoviePagingSource @Inject constructor(private val movieApi: MovieAPI) :
+class MoviePagingSource (private val movieApi: MovieAPI) :
     PagingSource<Int, MovieListItem>() {
     override fun getRefreshKey(state: PagingState<Int, MovieListItem>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
